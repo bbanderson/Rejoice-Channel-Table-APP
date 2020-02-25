@@ -19,6 +19,7 @@ class _ChannelState extends State<Channel> {
   Color selectedChannelColor;
   Color unselectedChannelColor;
   String status;
+  String currentChannel;
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _ChannelState extends State<Channel> {
     monitor = '채널을 선택해주세요!';
     selectedChannelColor = null;
     status = '채널을 선택해주세요!';
+    currentChannel = 'Channel';
   }
 
   @override
@@ -52,8 +54,28 @@ class _ChannelState extends State<Channel> {
 
     return Scaffold(
         appBar: AppBar(
+          leading: Icon(Icons.build),
+          centerTitle: true,
           title: Text('채널표'),
           backgroundColor: Colors.amber[200],
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+//                width: size.width * 0.3,
+//                color: Colors.red,
+                children: <Widget>[
+                  Card(
+//                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                      color: Colors.amber,
+                      elevation: 0,
+                      child: Text(currentChannel))
+                ],
+              ),
+            ),
+          ],
         ),
         body: OrientationBuilder(builder: (context, orientation) {
           return Container(
@@ -71,6 +93,7 @@ class _ChannelState extends State<Channel> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Container(
+                        width: size.width * 0.2,
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40)),
@@ -109,7 +132,7 @@ class _ChannelState extends State<Channel> {
                                 : unSelectedTabColor = Colors.grey[200],
                             splashColor: Colors.amber[200],
                             child: Text(
-                              'E.G/Bass',
+                              'Guitar',
                               style: TextStyle(fontSize: 11),
                             ),
                             onPressed: () {
@@ -231,7 +254,8 @@ class _ChannelState extends State<Channel> {
                             Container(
                               child: Card(
                                 child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
@@ -341,6 +365,12 @@ class _ChannelState extends State<Channel> {
 ////    return tabColor;
 //  }
 
+  void _returnCurrentChannel(String channel) {
+    setState(() {
+      this.currentChannel = channel;
+    });
+  }
+
   void _chosenChannel() {
     setState(() {
       if (selectedChannelColor == Colors.amber) {
@@ -356,6 +386,7 @@ class _ChannelState extends State<Channel> {
     setState(() {
       this.input = input;
       this.monitor = monitor;
+//      _returnCurrentChannel('인도자');
     });
   }
 
@@ -390,6 +421,7 @@ class _ChannelState extends State<Channel> {
                 subtitle: Text('Mic : Singer Box'),
                 onTap: () {
                   _showResult('16채널 4번', '16채널 1번');
+                  _returnCurrentChannel('인도자');
 
                   setState(() {});
                   print('인도자 Button is clicked.');
@@ -415,6 +447,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SHURE Wireless'),
               onTap: () {
                 _showResult('Don\'t need to know', 'Don\'t need to know');
+                _returnCurrentChannel('목사님');
 
                 setState(() {});
 //                          Navigator.of(context).pop();
@@ -439,6 +472,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 5번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 1');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -463,6 +497,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 6번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 2');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -487,6 +522,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 7번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 3');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -511,6 +547,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 8번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 4');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -535,6 +572,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 9번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 5');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -559,6 +597,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 11번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 6');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -583,6 +622,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 13번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 7');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -607,10 +647,61 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 14번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 8');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
                 print('Singer 8 Button is clicked.');
+              }),
+          ListTile(
+              leading: Image.asset(
+                'assets/icons/mic.png',
+                width: 30,
+                height: 30,
+                color: Colors.grey[850],
+              ),
+              trailing: Image.asset(
+                'assets/loading.gif',
+                height: 50,
+                width: 50,
+              ),
+              title: Text(
+                'Singer 9',
+                style: TextStyle(fontSize: 20),
+              ),
+              subtitle: Text('Mic : Singer Box'),
+              onTap: () {
+                _showResult('16채널 15번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 9');
+
+                setState(
+                    () {}); //                          Navigator.of(context).pop();
+                print('Singer 9 Button is clicked.');
+              }),
+          ListTile(
+              leading: Image.asset(
+                'assets/icons/mic.png',
+                width: 30,
+                height: 30,
+                color: Colors.grey[850],
+              ),
+              trailing: Image.asset(
+                'assets/loading.gif',
+                height: 50,
+                width: 50,
+              ),
+              title: Text(
+                'Singer 10(A.G와 공유)',
+                style: TextStyle(fontSize: 20),
+              ),
+              subtitle: Text('Mic : Singer Box'),
+              onTap: () {
+                _showResult('16채널 16번', 'L : 16채널 2번\nR : 16채널 3번');
+                _returnCurrentChannel('Singer 10');
+
+                setState(
+                    () {}); //                          Navigator.of(context).pop();
+                print('Singer 10 Button is clicked.');
               }),
         ],
 //              magnification: 2,
@@ -646,6 +737,7 @@ class _ChannelState extends State<Channel> {
                 subtitle: Text('Mic : SM57'),
                 onTap: () {
                   _showResult('24채널 18번', '24채널 4번\n(E.G 2와 공유)');
+                  _returnCurrentChannel('E.G 1');
 
                   setState(() {});
                   print('E.G 1 Button is clicked.');
@@ -671,6 +763,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SM57'),
               onTap: () {
                 _showResult('24채널 19번', '24채널 4번\n(E.G 1과 공유)');
+                _returnCurrentChannel('E.G 2');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -694,10 +787,38 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Connect to amp'),
               onTap: () {
                 _showResult('24채널 17번', '24채널 5번');
+                _returnCurrentChannel('Bass');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
                 print('Bass Button is clicked.');
+              }),
+          ListTile(
+              leading: Image.asset(
+                'assets/icons/fclef.png',
+                width: 33,
+                height: 33,
+              ),
+              trailing: Image.asset(
+                'assets/loading.gif',
+                height: 50,
+                width: 50,
+              ),
+              title: Text(
+                'A.G(Singer 10과 공유)',
+                style: TextStyle(fontSize: 20),
+              ),
+              subtitle: Text(
+                '거의 사용하지 않으므로 상황에 따라 다름',
+                style: TextStyle(fontSize: 10),
+              ),
+              onTap: () {
+                _showResult('16채널 16번', 'Don\'t need to know');
+                _returnCurrentChannel('A.G');
+
+                setState(
+                    () {}); //                          Navigator.of(context).pop();
+                print('A.G Button is clicked.');
               }),
         ],
 //              magnification: 2,
@@ -729,6 +850,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('DI : Green'),
               onTap: () {
                 _showResult('24채널 6번', '24채널 2번');
+                _returnCurrentChannel('S90ES');
 
                 setState(() {});
                 print('S90ES Button is clicked.');
@@ -753,6 +875,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('DI : Green'),
               onTap: () {
                 _showResult('24채널 7번', '24채널 3번');
+                _returnCurrentChannel('Motif');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -777,6 +900,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('DI : Silver'),
               onTap: () {
                 _showResult('24채널 8번', '24채널 3번');
+                _returnCurrentChannel('Triton');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -813,6 +937,7 @@ class _ChannelState extends State<Channel> {
                 subtitle: Text('Mic : SHURE Box'),
                 onTap: () {
                   _showResult('24채널 9번', '24채널 1번');
+                  _returnCurrentChannel('Kick');
 
                   setState(() {});
                   print('Kick Button is clicked.');
@@ -836,6 +961,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Beta 87A'),
               onTap: () {
                 _showResult('24채널 10번', '24채널 1번');
+                _returnCurrentChannel('Snare');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -858,6 +984,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SHURE Box'),
               onTap: () {
                 _showResult('24채널 11번', '24채널 1번');
+                _returnCurrentChannel('Hi-Hat');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -880,6 +1007,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SHURE Box - Mini'),
               onTap: () {
                 _showResult('24채널 12번', '24채널 1번');
+                _returnCurrentChannel('Tom 1');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -902,6 +1030,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SHURE Box - Mini'),
               onTap: () {
                 _showResult('24채널 13번', '24채널 1번');
+                _returnCurrentChannel('Tom 2');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -924,6 +1053,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SHURE Box - Mini'),
               onTap: () {
                 _showResult('24채널 14번', '24채널 1번');
+                _returnCurrentChannel('Tom 3');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -946,6 +1076,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SHURE Box,\nDrummer가 앉은 기준으로 왼쪽'),
               onTap: () {
                 _showResult('24채널 15번', '24채널 1번');
+                _returnCurrentChannel('O.H L');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
@@ -968,6 +1099,7 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : SHURE Box,\nDrummer가 앉은 기준으로 오른쪽'),
               onTap: () {
                 _showResult('24채널 16번', '24채널 1번');
+                _returnCurrentChannel('O.H R');
 
                 setState(
                     () {}); //                          Navigator.of(context).pop();
