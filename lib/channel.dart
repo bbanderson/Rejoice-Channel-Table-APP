@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'authPage.dart';
+
 class Channel extends StatefulWidget {
   @override
   _ChannelState createState() => _ChannelState();
@@ -35,7 +37,9 @@ class _ChannelState extends State<Channel> {
     monitor = '채널을 선택해주세요!';
     selectedChannelColor = null;
     status = '채널을 선택해주세요!';
-    currentChannel = 'Channel';
+    currentChannel = '';
+
+
   }
 
   @override
@@ -49,163 +53,201 @@ class _ChannelState extends State<Channel> {
     super.dispose();
   }
 
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  _showSnackBar() {
+    final snackBar = SnackBar(
+      content: Text('채널을 수정하려면 로그인이 필요합니다.'),
+      action: SnackBarAction(label: '로그인', onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AuthPage()));
+      },),
+    );
+    _scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
-        appBar: AppBar(
-          leading: Icon(Icons.build),
-          centerTitle: true,
-          title: Text('채널표'),
-          backgroundColor: Colors.amber[200],
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-              mainAxisSize: MainAxisSize.max,
+      key: _scaffoldKey,
+      appBar: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.only(top: 10, bottom: 10, right: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                  width: 30, height: 30,
+                  child: IconButton(icon: Icon(Icons.build),
+                    iconSize: 17,
+                    onPressed: () {
+                    _showSnackBar();
+                      },))
+//                Image.asset(
+//                  'assets/icons/'
+//                  child: Icon(
+//                    Icons.build,
+//                    size: 17,
+//                    color: Colors.grey[850],
+//                  ),
+//                ),
+            ],
+          ),
+        ),
+        centerTitle: true,
+        title: Text('채널표'),
+        backgroundColor: Colors.amber[200],
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
 //                width: size.width * 0.3,
 //                color: Colors.red,
-                children: <Widget>[
-                  Card(
-//                  margin: EdgeInsets.only(top: 10, bottom: 10),
-                      color: Colors.amber,
-                      elevation: 0,
-                      child: Text(currentChannel))
-                ],
-              ),
-            ),
-          ],
-        ),
-        body: OrientationBuilder(builder: (context, orientation) {
-          return Container(
-            width: size.width,
-            height: size.height,
-            child: Column(
               children: <Widget>[
-                Container(
-                  height: size.height * 0.1,
-                  width: size.width,
-                  child: Flex(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                Text(currentChannel),
+//                  SizedBox(width: 8,)
+              ],
+            ),
+          ),
+        ],
+      ),
+      body: OrientationBuilder(builder: (context, orientation) {
+        return Container(
+          width: size.width,
+          height: size.height,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: size.height * 0.1,
+                width: size.width,
+                child: Flex(
+                  crossAxisAlignment: CrossAxisAlignment.end,
 //                  mainAxisSize: MainAxisSize.min,
-                    direction: Axis.horizontal,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Container(
-                        width: size.width * 0.2,
-                        child: RaisedButton(
+                  direction: Axis.horizontal,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                      width: size.width * 0.2,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40)),
+                        color: channelIndex == 0
+                            ? tabColor = Colors.amber[200]
+                            : unSelectedTabColor = Colors.grey[200],
+                        splashColor: Colors.amber[200],
+                        child: Text(
+                          'Singer',
+                          style: TextStyle(fontSize: 11),
+                        ),
+                        onPressed: () {
+                          context:
+                          _onItemTapped(0);
+                          _showResult('채널을 선택해주세요!', '채널을 선택해주세요!');
+                          _returnCurrentChannel('');
+
+                          isSelect = !isSelect;
+//                          _clickedTabColor(isSelect);
+
+//                                channelSaved.changeChannelList(item)
+                          setState(() {
+                            channelIndex = 0;
+//                                channelSaved.savedStream;
+                            channels[channelIndex] = singerList();
+                          });
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: size.width * 0.2,
+                      child: RaisedButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40)),
-                          color: channelIndex == 0
+                          color: channelIndex == 1
                               ? tabColor = Colors.amber[200]
                               : unSelectedTabColor = Colors.grey[200],
                           splashColor: Colors.amber[200],
                           child: Text(
-                            'Singer',
+                            'Guitar',
                             style: TextStyle(fontSize: 11),
                           ),
                           onPressed: () {
-                            context:
-                            _onItemTapped(0);
+                            _onItemTapped(1);
                             _showResult('채널을 선택해주세요!', '채널을 선택해주세요!');
-
+                            _returnCurrentChannel('');
                             isSelect = !isSelect;
-//                          _clickedTabColor(isSelect);
-
-//                                channelSaved.changeChannelList(item)
-                            setState(() {
-                              channelIndex = 0;
-//                                channelSaved.savedStream;
-                              channels[channelIndex] = singerList();
-                            });
-                          },
-                        ),
-                      ),
-                      Container(
-                        width: size.width * 0.2,
-                        child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
-                            color: channelIndex == 1
-                                ? tabColor = Colors.amber[200]
-                                : unSelectedTabColor = Colors.grey[200],
-                            splashColor: Colors.amber[200],
-                            child: Text(
-                              'Guitar',
-                              style: TextStyle(fontSize: 11),
-                            ),
-                            onPressed: () {
-                              _onItemTapped(1);
-                              _showResult('채널을 선택해주세요!', '채널을 선택해주세요!');
-                              isSelect = !isSelect;
 //                            _clickedTabColor(isSelect);
 
-                              setState(() {
-                                channelIndex = 1;
+                            setState(() {
+                              channelIndex = 1;
 //                            show.removeLast();
 //                            show.add(channels[channelIndex]);
-                                channels[channelIndex] = guitarList();
-                              });
-                            }),
-                      ),
-                      Container(
-                        width: size.width * 0.2,
-                        child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
-                            color: channelIndex == 2
-                                ? tabColor = Colors.amber[200]
-                                : unSelectedTabColor = Colors.grey[200],
-                            splashColor: Colors.amber[200],
-                            child: Text(
-                              'Keys',
-                              style: TextStyle(fontSize: 11),
-                            ),
-                            onPressed: () {
-                              _onItemTapped(2);
-                              _showResult('채널을 선택해주세요!', '채널을 선택해주세요!');
+                              channels[channelIndex] = guitarList();
+                            });
+                          }),
+                    ),
+                    Container(
+                      width: size.width * 0.2,
+                      child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40)),
+                          color: channelIndex == 2
+                              ? tabColor = Colors.amber[200]
+                              : unSelectedTabColor = Colors.grey[200],
+                          splashColor: Colors.amber[200],
+                          child: Text(
+                            'Keys',
+                            style: TextStyle(fontSize: 11),
+                          ),
+                          onPressed: () {
+                            _onItemTapped(2);
+                            _showResult('채널을 선택해주세요!', '채널을 선택해주세요!');
+                            _returnCurrentChannel('');
 
-                              isSelect = !isSelect;
+                            isSelect = !isSelect;
 //                            _clickedTabColor(isSelect);
 
-                              setState(() {
-                                channelIndex = 2;
-                                channels[channelIndex] = keysList();
+                            setState(() {
+                              channelIndex = 2;
+                              channels[channelIndex] = keysList();
 //                              print(channels[channelIndex]);
-                              });
-                            }),
-                      ),
-                      Container(
-                        width: size.width * 0.2,
-                        child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
-                            color: channelIndex == 3
-                                ? tabColor = Colors.amber[200]
-                                : unSelectedTabColor = Colors.grey[200],
-                            splashColor: Colors.amber[200],
-                            child: Text(
-                              'Drum',
-                              style: TextStyle(fontSize: 11),
-                            ),
-                            onPressed: () {
-                              _onItemTapped(3);
-                              _showResult('채널을 선택해주세요!', '24채널 1번');
+                            });
+                          }),
+                    ),
+                    Container(
+                      width: size.width * 0.2,
+                      child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40)),
+                          color: channelIndex == 3
+                              ? tabColor = Colors.amber[200]
+                              : unSelectedTabColor = Colors.grey[200],
+                          splashColor: Colors.amber[200],
+                          child: Text(
+                            'Drum',
+                            style: TextStyle(fontSize: 11),
+                          ),
+                          onPressed: () {
+                            _onItemTapped(3);
+                            _showResult('채널을 선택해주세요!', '24채널 1번');
+                            _returnCurrentChannel('');
 
-                              isSelect = !isSelect;
+                            isSelect = !isSelect;
 //                            _clickedTabColor(isSelect);
 
-                              setState(() {
-                                channelIndex = 3;
-                                channels[channelIndex] = drumList();
+                            setState(() {
+                              channelIndex = 3;
+                              channels[channelIndex] = drumList();
 //                              print(channels[channelIndex]);
-                              });
-                            }),
-                      ),
-                    ],
-                  ),
+                            });
+                          }),
+                    ),
+                  ],
                 ),
+              ),
 //              SizedBox(
 //                child: Container(
 //                  color: Colors.grey[300],
@@ -213,136 +255,136 @@ class _ChannelState extends State<Channel> {
 //                ),
 //                height: size.height * 0.001,
 //              ),
-                Container(
+              Container(
 //                color: Colors.amber,
-                  height: size.height * 0.45,
-                  child: Card(
-                    color: Colors.amber[200],
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
-                      child: channels[channelIndex],
-                    ),
+                height: size.height * 0.45,
+                child: Card(
+                  color: Colors.amber[200],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                    child: channels[channelIndex],
                   ),
                 ),
-                SizedBox(
-                  child: Container(
+              ),
+              SizedBox(
+                child: Container(
 //                  color: Colors.grey[300],
-                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  ),
-                  height: size.height * 0.03,
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                 ),
-                //result box 전체 container
-                Container(
-                  height: size.height * 0.25,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                height: size.height * 0.03,
+              ),
+              //result box 전체 container
+              Container(
+                height: size.height * 0.25,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
 //                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            Text(
-                              'INPUT\n(롤에 꽂는 그림)',
-                              style: TextStyle(),
-                              textAlign: TextAlign.center,
-                            ),
-                            Container(
-                              child: Card(
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      input,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                                color: Colors.amber[200],
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                        children: <Widget>[
+                          Text(
+                            'INPUT\n(롤에 꽂는 그림)',
+                            style: TextStyle(),
+                            textAlign: TextAlign.center,
+                          ),
+                          Container(
+                            child: Card(
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    input,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
-                              height: size.height * 0.2 * 0.5,
+                              color: Colors.amber[200],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
                             ),
+                            height: size.height * 0.2 * 0.5,
+                          ),
 //                            Container(
 //                              height: size.height * 0.2 * 0.4,
 //                              color: Colors.red,
 //                            ),
-                            Container(
-                              height: size.height * 0.07,
-                              child: Image.asset(
-                                'assets/xlr_m.png',
-                                width: size.width * 0.11,
-                                height: size.height * 0.11,
-                              ),
+                          Container(
+                            height: size.height * 0.07,
+                            child: Image.asset(
+                              'assets/xlr_m.png',
+                              width: size.width * 0.11,
+                              height: size.height * 0.11,
                             ),
-                          ],
-                        ),
-                        width: size.width * 0.38,
-                        height: size.height * 0.03,
+                          ),
+                        ],
+                      ),
+                      width: size.width * 0.38,
+                      height: size.height * 0.03,
 
 //                      color: Colors.red,
-                      ),
-                      Container(
-                        child: Icon(Icons.compare_arrows),
-                      ),
-                      Container(
-                        height: size.height * 0.07,
+                    ),
+                    Container(
+                      child: Icon(Icons.compare_arrows),
+                    ),
+                    Container(
+                      height: size.height * 0.07,
 //                        color: Colors.red,
-                        child: Column(
+                      child: Column(
 //                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'MONITOR\n(롤에 꽂는 그림)',
-                              style: TextStyle(),
-                              textAlign: TextAlign.center,
-                            ),
-                            Container(
-                              child: Card(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      monitor,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                                color: Colors.amber[200],
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'MONITOR\n(롤에 꽂는 그림)',
+                            style: TextStyle(),
+                            textAlign: TextAlign.center,
+                          ),
+                          Container(
+                            child: Card(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    monitor,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
-                              width: size.width,
+                              color: Colors.amber[200],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                            ),
+                            width: size.width,
 //
-                              height: size.height * 0.2 * 0.5,
+                            height: size.height * 0.2 * 0.5,
+                          ),
+                          Container(
+                            height: size.height * 0.07,
+                            child: Image.asset(
+                              'assets/xlr_f.png',
+                              width: size.width * 0.1,
+                              height: size.height * 0.1,
                             ),
-                            Container(
-                              height: size.height * 0.07,
-                              child: Image.asset(
-                                'assets/xlr_f.png',
-                                width: size.width * 0.1,
-                                height: size.height * 0.1,
-                              ),
-                            ),
-                          ],
-                        ),
-                        width: size.width * 0.38,
+                          ),
+                        ],
+                      ),
+                      width: size.width * 0.38,
 //                      color: Colors.blue,
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              ],
-            ),
-          );
-        }));
+              ),
+            ],
+          ),
+        );
+      }),);
   }
 
   Widget _onItemTapped(int index) {
@@ -427,7 +469,7 @@ class _ChannelState extends State<Channel> {
                   print('인도자 Button is clicked.');
                 }),
           ),
-//                    Divider(),
+//          Divider(height: 0.1),
           ListTile(
               leading: Image.asset(
                 'assets/icons/rev_mic.png',
@@ -475,7 +517,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 1');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 1 Button is clicked.');
               }),
           ListTile(
@@ -500,7 +542,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 2');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 2 Button is clicked.');
               }),
           ListTile(
@@ -525,7 +567,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 3');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 3 Button is clicked.');
               }),
           ListTile(
@@ -550,7 +592,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 4');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 4 Button is clicked.');
               }),
           ListTile(
@@ -575,7 +617,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 5');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 5 Button is clicked.');
               }),
           ListTile(
@@ -600,7 +642,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 6');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 6 Button is clicked.');
               }),
           ListTile(
@@ -625,7 +667,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 7');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 7 Button is clicked.');
               }),
           ListTile(
@@ -650,7 +692,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 8');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 8 Button is clicked.');
               }),
           ListTile(
@@ -675,7 +717,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Singer 9');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Singer 9 Button is clicked.');
               }),
           ListTile(
@@ -697,11 +739,11 @@ class _ChannelState extends State<Channel> {
               subtitle: Text('Mic : Singer Box'),
               onTap: () {
                 _showResult('16채널 16번', 'L : 16채널 2번\nR : 16채널 3번');
-                _returnCurrentChannel('Singer 10');
+                _returnCurrentChannel('Singer 10 / A.G');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
-                print('Singer 10 Button is clicked.');
+                        () {}); //                          Navigator.of(context).pop();
+                print('Singer 10 / A.G Button is clicked.');
               }),
         ],
 //              magnification: 2,
@@ -766,7 +808,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('E.G 2');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('E.G 2 Button is clicked.');
               }),
           ListTile(
@@ -790,12 +832,12 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Bass');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Bass Button is clicked.');
               }),
           ListTile(
               leading: Image.asset(
-                'assets/icons/fclef.png',
+                'assets/icons/gclef.png',
                 width: 33,
                 height: 33,
               ),
@@ -814,11 +856,11 @@ class _ChannelState extends State<Channel> {
               ),
               onTap: () {
                 _showResult('16채널 16번', 'Don\'t need to know');
-                _returnCurrentChannel('A.G');
+                _returnCurrentChannel('A.G / Singer 10');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
-                print('A.G Button is clicked.');
+                        () {}); //                          Navigator.of(context).pop();
+                print('A.G / Singer 10 Button is clicked.');
               }),
         ],
 //              magnification: 2,
@@ -878,7 +920,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Motif');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Motif XF 7 Button is clicked.');
               }),
           ListTile(
@@ -903,7 +945,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Triton');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Triton LE Button is clicked.');
               }),
         ],
@@ -964,7 +1006,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Snare');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Snare Button is clicked.');
               }),
           ListTile(
@@ -987,7 +1029,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Hi-Hat');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Hi-Hat Button is clicked.');
               }),
           ListTile(
@@ -1010,7 +1052,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Tom 1');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Tom 1 Button is clicked.');
               }),
           ListTile(
@@ -1033,7 +1075,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Tom 2');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Tom 2 Button is clicked.');
               }),
           ListTile(
@@ -1056,7 +1098,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('Tom 3');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Tom 3 Button is clicked.');
               }),
           ListTile(
@@ -1079,7 +1121,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('O.H L');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Over Head L Button is clicked.');
               }),
           ListTile(
@@ -1102,7 +1144,7 @@ class _ChannelState extends State<Channel> {
                 _returnCurrentChannel('O.H R');
 
                 setState(
-                    () {}); //                          Navigator.of(context).pop();
+                        () {}); //                          Navigator.of(context).pop();
                 print('Over Head R Button is clicked.');
               }),
         ],

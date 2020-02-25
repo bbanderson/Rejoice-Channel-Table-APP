@@ -52,6 +52,7 @@ flutter:
     - assets/icons/piano2.png
     - assets/icons/piano3.png
     - assets/icons/fclef.png
+    - assets/icons/gclef.png
     - assets/xlr_f.png
     - assets/xlr_m.png
 
