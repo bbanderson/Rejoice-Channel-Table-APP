@@ -7,9 +7,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Rejoicer',
+      title: 'Rejoice 채널표',
       theme: ThemeData(
           primarySwatch: Colors.amber,
+          primaryColor: Colors.amber,
+          primaryColorBrightness: Brightness.light,
           fontFamily: 'qn'
       ),
       debugShowCheckedModeBanner: false,

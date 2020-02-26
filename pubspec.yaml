@@ -23,6 +23,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+#  firebase_auth: ^0.15.4
+
 
 dev_dependencies:
   flutter_test:
@@ -43,16 +45,24 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/loading.gif
-    - assets/icons/mic.png
-    - assets/icons/leader_mic.png
+    - assets/icons/singer.png
+    - assets/icons/leader.png
     - assets/icons/rev_mic.png
-    - assets/icons/guitar.png
-    - assets/icons/guitar2.png
-    - assets/icons/piano.png
-    - assets/icons/piano2.png
-    - assets/icons/piano3.png
-    - assets/icons/fclef.png
-    - assets/icons/gclef.png
+    - assets/icons/eg1.png
+    - assets/icons/eg2.png
+    - assets/icons/s90es.png
+    - assets/icons/motif.png
+    - assets/icons/triton.png
+    - assets/icons/bass.png
+    - assets/icons/ag.png
+    - assets/icons/kick.png
+    - assets/icons/snare.png
+    - assets/icons/hihat.png
+    - assets/icons/t1.png
+    - assets/icons/t2.png
+    - assets/icons/t3.png
+    - assets/icons/ohl.png
+    - assets/icons/ohr.png
     - assets/xlr_f.png
     - assets/xlr_m.png
 

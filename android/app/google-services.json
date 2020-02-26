@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "506667725240",
+    "firebase_url": "https://rejoice-channel-table-auth.firebaseio.com",
+    "project_id": "rejoice-channel-table-auth",
+    "storage_bucket": "rejoice-channel-table-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506667725240:android:bc983cfa00fa7ce730df4d",
+        "android_client_info": {
+          "package_name": "com.bbanpro.rejoicer_channel_table"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506667725240-uh45luojoc4ia7c3q9emu8vihhs5qvbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3dP4Lhevdx5rAHVILt0RSkCriq_2XWTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506667725240-uh45luojoc4ia7c3q9emu8vihhs5qvbl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
