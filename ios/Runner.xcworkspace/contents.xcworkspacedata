@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/hyunhongbyun/Desktop/StartUp/__practicing/rejoicer_channel_table/ios/Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.xcodeproj">
+      location = "group:Runner.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

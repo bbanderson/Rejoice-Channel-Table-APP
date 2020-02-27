@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1130"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "97C146ED1CF9000F007C117D"
-               BuildableName = "Runner.app"
-               BlueprintName = "Runner"
-               ReferencedContainer = "container:Runner.xcodeproj">
+               BuildableName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.app"
+               BlueprintName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;"
+               ReferencedContainer = "container:Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,19 +27,17 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97C146ED1CF9000F007C117D"
-            BuildableName = "Runner.app"
-            BlueprintName = "Runner"
-            ReferencedContainer = "container:Runner.xcodeproj">
+            BuildableName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.app"
+            BlueprintName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;"
+            ReferencedContainer = "container:Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -56,13 +54,20 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97C146ED1CF9000F007C117D"
-            BuildableName = "Runner.app"
+            BuildableName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.app"
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "97C146ED1CF9000F007C117D"
+            BuildableName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.app"
+            BlueprintName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;"
+            ReferencedContainer = "container:Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Profile"
@@ -75,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97C146ED1CF9000F007C117D"
-            BuildableName = "Runner.app"
-            BlueprintName = "Runner"
-            ReferencedContainer = "container:Runner.xcodeproj">
+            BuildableName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.app"
+            BlueprintName = "Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;"
+            ReferencedContainer = "container:Rejoice &#x110e;&#x1162;&#x1102;&#x1165;&#x11af;&#x1111;&#x116d;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -86,6 +91,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Rejoice &#xcc44;&#xb110;&#xd45c;"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
