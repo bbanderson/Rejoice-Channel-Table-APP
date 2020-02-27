@@ -53,22 +53,23 @@ class _ChannelState extends State<Channel> {
     super.dispose();
   }
 
-//  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-//  _showSnackBar() {
-//    final snackBar = SnackBar(
-//      content: Text('채널을 수정하려면 로그인이 필요합니다.'),
-//      action: SnackBarAction(label: '로그인', onPressed: (){
-//        Navigator.push(context, MaterialPageRoute(builder: (context) => AuthPage()));
-//      },),
-//    );
-//    _scaffoldKey.currentState.showSnackBar(snackBar);
-//  }
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  _showSnackBar() {
+    final snackBar = SnackBar(
+      content: Text('채널을 수정하려면 로그인이 필요합니다.'),
+      action: SnackBarAction(label: '로그인', onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AuthPage()));
+      },),
+    );
+    _scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
 
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-//      key: _scaffoldKey,
+      key: _scaffoldKey,
       appBar: AppBar(
         brightness: Brightness.light,
         shape: RoundedRectangleBorder(side:BorderSide(style:BorderStyle.none),borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10),)),
@@ -79,13 +80,16 @@ class _ChannelState extends State<Channel> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-//              Container(
-//                  width: 30, height: 30,
-//                  child: IconButton(icon: Icon(Icons.build),
-//                    iconSize: 17,
-//                    onPressed: () {
-//                    _showSnackBar();
-//                      },))
+              Container(
+                  width: 30, height: 30,
+                  child: IconButton(icon: Icon(Icons.edit),
+                    iconSize: 17,
+                    onPressed: () {
+                    _showSnackBar();
+                    setState(() {
+
+                    });
+                      },))
 
 //                Image.asset(
 //                  'assets/icons/'
@@ -796,7 +800,7 @@ class _ChannelState extends State<Channel> {
 //                  width: 50,
 //                ),
                 title: Text(
-                  'E.G 1 (현홍)',
+                  'E.G 1',
                   style: TextStyle(fontSize: 20),
                 ),
                 subtitle: Text('Mic : SM57'),
@@ -822,7 +826,7 @@ class _ChannelState extends State<Channel> {
 //                width: 50,
 //              ),
               title: Text(
-                'E.G 2 (명진)',
+                'E.G 2',
                 style: TextStyle(fontSize: 20),
               ),
               subtitle: Text('Mic : SM57'),
