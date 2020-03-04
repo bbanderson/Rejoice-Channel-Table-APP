@@ -1,9 +1,8 @@
-//
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rejoicer_channel_table/modifyChannel.dart';
 
-//
 class AuthPage extends StatefulWidget {
   @override
   _AuthPageState createState() => _AuthPageState();
@@ -18,11 +17,15 @@ class _AuthPageState extends State<AuthPage> {
 
   final TextEditingController _passwordController = TextEditingController();
 
+  String _error;
+
   _showSnackBar() {
     final snackBar = SnackBar(
       content: Text('다시 시도해 주세요.'),
-      action: SnackBarAction(onPressed: (){
-      },),
+      action: SnackBarAction(
+        label: 'OK',
+        onPressed: () {},
+      ),
     );
     _scaffoldKey.currentState.showSnackBar(snackBar);
   }
@@ -91,6 +94,7 @@ class _AuthPageState extends State<AuthPage> {
                       ),
                     ),
                   ),
+                  Positioned(left: size.width * 0.01, right: size.width * 0.01,top:30,child: ShowAlert()),
                 ],
               ),
             ),
@@ -145,6 +149,7 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                   ),
                   TextFormField(
+                    style: TextStyle(fontFamily: ''),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     controller: _passwordController,
@@ -161,7 +166,9 @@ class _AuthPageState extends State<AuthPage> {
                     },
                   ),
                   _loginButton(size),
-                  SizedBox(height: size.height * 0.02,),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
                   _backButton(size),
                 ],
               ),
@@ -212,19 +219,70 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   void _login(BuildContext context) async {
-    final AuthResult result = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: _idController.text, password: _passwordController.text);
-    final FirebaseUser user = result.user;
-
-    if (user.metadata == null) {
-    _showSnackBar();
+    try {
+      final AuthResult result = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _idController.text, password: _passwordController.text);
+      final FirebaseUser user = result.user;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ModifyChannel(email: user.email)));
+    } catch (e) {
+      print(e);
+      String ema;
+      if (e.message ==
+          'The password is invalid or the user does not have a password.') {
+        ema = '비밀번호가 틀리네요!';
+      } else if (e.message == 'The email address is badly formatted.') {
+        ema = '이메일 주소 형식을 확인해 주세요!';
+      } else if (e.message ==
+          'There is no user record corresponding to this identifier. The user may have been deleted.') {
+        ema = '관리자가 아닌 것 같아요!';
+      }
+      setState(() {
+        _error = ema;
+      });
     }
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ModifyChannel(email: user.email)));
+//    if (user.metadata == null) {
+//      _showSnackBar();
+//    }
   }
 
-
+  Widget ShowAlert() {
+    if (_error != null) {
+      return Card(
+        color: Colors.redAccent,
+//        width: double.infinity,
+//        padding: EdgeInsets.all(8),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(Icons.error_outline),
+              ),
+              Expanded(
+                child: AutoSizeText(
+                  _error,
+                  maxLines: 3,
+                ),
+              ),
+              IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    setState(() {
+                      _error = null;
+                    });
+                  }),
+            ],
+          ),
+        ),
+      );
+    }
+    return SizedBox(
+      height: 0,
+    );
+  }
 }
